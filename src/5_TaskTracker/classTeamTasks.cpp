@@ -22,24 +22,25 @@ public:
 	// подробности см. ниже
 	tuple<TasksInfo, TasksInfo> PerformPersonTasks(
 			const string& person, int task_count) {
-                TasksInfo updated, old; //output containers
-                TasksInfo some_tasks = team.at(person); //task list (map) for a person
-                vector<TaskStatus> tasks = { // checking against all status values
+                TasksInfo updated; //output containers
+                TasksInfo old = team[person]; //task list (map) for a person
+                vector<TaskStatus> tasks = { // checking against all incomplete statuses
                     TaskStatus::NEW, TaskStatus::IN_PROGRESS, 
                     TaskStatus::TESTING/*,  TaskStatus::DONE */};
                 for (auto task : tasks) {
-                    int& this_task_qty = some_tasks[task]; //qty of tasks of this type (status)
-                    if (this_task_qty == 0) {
-                        some_tasks.erase(task);
-                    } 
-                    while (task_count > 0 && this_task_qty) {
+                    int& this_task_qty = old[task]; //qty of tasks of this type (status)
+                    while (task_count > 0 && this_task_qty > 0) {
+                        task_count--;
                         this_task_qty--;
                         updated[UpdateTask(task, team.at(person))]++;
-                        task_count--;
                     }
-                    for (int i = this_task_qty; i > 0; i --) {
+                    /* for (int i = this_task_qty; i > 0; i--) {
                         old[task]++;
-                    }
+                    } */
+                    if (this_task_qty == 0) { //clean up if no tasks
+                        old.erase(task);
+                    } 
+                    old.erase(TaskStatus::DONE);
                 }
                 return {updated, old};
             }
