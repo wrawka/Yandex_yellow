@@ -25,6 +25,7 @@ istream& operator >> (istream& is, Query& q) {
 	is >> query;
 	if (query == "NEW_BUS") {
 		q.type = QueryType::NewBus;
+		q.stops.clear();
 		int stops_count;
 		is >> q.bus >> stops_count;
 		while (stops_count--) {
@@ -77,11 +78,13 @@ ostream& operator << (ostream& os, const StopsForBusResponse& r) {
 }
 
 struct AllBusesResponse {
-    // Наполните полями эту структуру
+    vector<string> all_buses;
 };
 
 ostream& operator << (ostream& os, const AllBusesResponse& r) {
-    // Реализуйте эту функцию
+    for (const auto& out : r.all_buses) {
+    	os << out << endl;
+    }
     return os;
 }
 
@@ -100,7 +103,7 @@ public:
         if (stops_to_buses.count(stop) == 0) {
         	response.stop = "No stop\n";
         } else {
-        	response.buses = buses_to_stops.at(stop);
+        	response.buses = stops_to_buses.at(stop);
         }
         return response;
     }
@@ -108,13 +111,12 @@ public:
     StopsForBusResponse GetStopsForBus(const string& bus) const {
     	StopsForBusResponse response;
     	response.bus = "";
-    	int n = 0;
+    	response.stops.clear();
         if (buses_to_stops.count(bus) == 0) {
         	response.bus = "No bus\n";
         } else {
             for (const string& stop : buses_to_stops.at(bus)) {
-            	string& some_stop = response.stops[n];
-            	some_stop = "Stop " + stop + ": ";
+            	string some_stop = "Stop " + stop + ": ";
             	if (stops_to_buses.at(stop).size() == 1) {
             		some_stop += "no interchange";
             	} else {
@@ -124,17 +126,30 @@ public:
             			}
             		}
             	}
-            	n++;
+            	response.stops.push_back(some_stop);
             }
         }
     	return response;
     }
 
-//    AllBusesResponse GetAllBuses() const {
-//        // Реализуйте этот метод
-//    }
-private:
+    AllBusesResponse GetAllBuses() const {
+    	AllBusesResponse response;
+    	response.all_buses.clear();
+        if (buses_to_stops.empty()) {
+        	response.all_buses.push_back("No buses");
+        } else {
+        	for (const auto& bus_item : buses_to_stops) {
+        		string bus_line = "Bus " + bus_item.first + ": ";
+        		for (const string& stop : bus_item.second) {
+        			bus_line += stop + " ";
+        		}
+        		response.all_buses.push_back(bus_line);
+        	}
+        }
+    	return response;
+    }
 
+private:
     // маршрут + его остановки, в порядке добавления
     map<string, vector<string>> buses_to_stops;
 
@@ -145,9 +160,10 @@ private:
 // Не меняя тела функции main, реализуйте функции и классы выше
 
 int main() {
+	cout << "Starting the programm...\n";
     int query_count;
     Query q;
-
+    cout << "Input a number of command to process: ";
     cin >> query_count;
 
     BusManager bm;
@@ -156,6 +172,7 @@ int main() {
         switch (q.type) {
         case QueryType::NewBus:
             bm.AddBus(q.bus, q.stops);
+            cout << "New bus added\n";
             break;
         case QueryType::BusesForStop:
             cout << bm.GetBusesForStop(q.stop) << endl;
@@ -163,9 +180,9 @@ int main() {
         case QueryType::StopsForBus:
             cout << bm.GetStopsForBus(q.bus) << endl;
             break;
-//        case QueryType::AllBuses:
-//            cout << bm.GetAllBuses() << endl;
-//            break;
+        case QueryType::AllBuses:
+            cout << bm.GetAllBuses() << endl;
+            break;
         }
     }
 
