@@ -1,10 +1,4 @@
 #include <iostream>
-#include <vector>
-#include <set>
-#include <algorithm>
-
-using namespace std;
-
 #include "FindGreaterElements.h"
 
 int main() {
