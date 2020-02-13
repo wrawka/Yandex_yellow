@@ -8,6 +8,7 @@ CPP_SRCS += \
 ../src/condition_parser_test.cpp \
 ../src/finals.cpp \
 ../src/main.cpp \
+../src/test_runner.cpp \
 ../src/token.cpp 
 
 OBJS += \
@@ -15,6 +16,7 @@ OBJS += \
 ./src/condition_parser_test.o \
 ./src/finals.o \
 ./src/main.o \
+./src/test_runner.o \
 ./src/token.o 
 
 CPP_DEPS += \
@@ -22,6 +24,7 @@ CPP_DEPS += \
 ./src/condition_parser_test.d \
 ./src/finals.d \
 ./src/main.d \
+./src/test_runner.d \
 ./src/token.d 
 
 
