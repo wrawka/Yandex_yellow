@@ -18,7 +18,7 @@ struct Node {
 
 struct Value : public Node {
   Value(char digit) : _value(digit - '0') {} 
-  // (digit - '0') выполняет преобразование char в int
+  // (digit - '0') в каком-то смысле выполняет преобразование char в int
 
   int Evaluate() const override { return _value; }
 
