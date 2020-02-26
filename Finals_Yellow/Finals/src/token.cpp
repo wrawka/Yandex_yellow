@@ -9,21 +9,21 @@ vector<Token> Tokenize(istream& cl) {
 
   char c;
   while (cl >> c) {
-    if (isdigit(c)) {
+    if (isdigit(c)) {	// Check if character is decimal digit
       string date(1, c);
       for (int i = 0; i < 3; ++i) {
         while (isdigit(cl.peek())) {
           date += cl.get();
         }
         if (i < 2) {
-          date += cl.get(); // Consume '-'
+          date += cl.get(); // Consume '-' што =_=
         }
       }
       tokens.push_back({date, TokenType::DATE});
     } else if (c == '"') {
       string event;
       getline(cl, event, '"');
-      tokens.push_back({event, TokenType::EVENT});
+      tokens.push_back({event, TokenType::EVENT}); // событие получаем в кавычках?
     } else if (c == 'd') {
       if (cl.get() == 'a' && cl.get() == 't' && cl.get() == 'e') {
         tokens.push_back({"date", TokenType::COLUMN});

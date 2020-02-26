@@ -20,7 +20,7 @@ public:
 	 * Встретив команду Add date event, ваша программа
 	 * должна добавить пару (date, event) в базу данных
 	 */
-	void Add(){}
+	void Add(const Date& date, const string& event);
 
 	/*
 	 * Встретив команду Print, ваша программа должна вывести
