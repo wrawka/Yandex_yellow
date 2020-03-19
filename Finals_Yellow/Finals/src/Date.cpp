@@ -12,11 +12,16 @@ using namespace std;
 
 // конструктор выбрасывает исключение, если его аргументы некорректны
 Date::Date(int new_year = 1970, int new_month = 1, int new_day = 1) {
+//год может быть любым
   year = new_year;
+
+//проверка значения месяца
   if (new_month > 12 || new_month < 1) {
     throw logic_error("Month value is invalid: " + to_string(new_month));
   }
   month = new_month;
+
+//проверка значения дня
   if (new_day > 31 || new_day < 1) {
     throw logic_error("Day value is invalid: " + to_string(new_day));
   }

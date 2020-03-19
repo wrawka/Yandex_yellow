@@ -20,7 +20,7 @@ public:
 	 * Встретив команду Add date event, ваша программа
 	 * должна добавить пару (date, event) в базу данных
 	 */
-	void Add(const Date& date, const string& event);
+	void Add(istream& is);
 
 	/*
 	 * Встретив команду Print, ваша программа должна вывести
@@ -30,18 +30,13 @@ public:
 	 * События в рамках одной даты необходимо выводить в порядке добавления
 	 * (за исключением уже удалённых и попыток добавления повторов).
 	 */
-	  void Print() const {
-	    for (const auto& item : storage) {
-	      for (const string& event : item.second) {
-	        cout << item.first << " " << event << endl;
-	      }
-	    }
-	  }
+	  void Print() const;
+
 	/*
 	 * По команде Last date нужно вывести
 	 * последнее из событий, случившихся к дате date.
 	 */
-	void Last(){}
+	void Last();
 
 	/*
 	 * Встретив команду Find condition, ваша программа
@@ -49,13 +44,13 @@ public:
 	 * которые в данный момент содержатся в базе данных
 	 * и удовлетворяют условию condition.
 	 */
-	void FindIf(){}
+	void FindIf();
 
 	/*
 	 * Встретив команду Del condition, ваша программа должна удалить
 	 * из базы данных все события, удовлетворяющие условию condition
 	 */
-	void RemoveIf(){}
+	void RemoveIf();
 
 private:
 	map<Date, set<string>> storage;

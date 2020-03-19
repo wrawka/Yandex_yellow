@@ -10,8 +10,8 @@
 #include <set>
 
 
-  void Database::Add(const Date& date, const string& event) {
-    storage[date].insert(event);
+  void Database::Add(istream& is) {
+
   }
 
 //  bool Database::DeleteEvent(const Date& date, const string& event) {

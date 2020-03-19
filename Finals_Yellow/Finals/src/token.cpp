@@ -19,21 +19,21 @@ vector<Token> Tokenize(istream& cl) {
           date += cl.get(); // Consume '-' што =_=
         }
       }
-      tokens.push_back({date, TokenType::DATE});
+      tokens.push_back({date, TokenType::DATE}); // нашли дату, положили в вектор токен "ДАТА"
     } else if (c == '"') {
       string event;
       getline(cl, event, '"');
-      tokens.push_back({event, TokenType::EVENT}); // событие получаем в кавычках?
+      tokens.push_back({event, TokenType::EVENT}); // событие получаем в кавычках
     } else if (c == 'd') {
       if (cl.get() == 'a' && cl.get() == 't' && cl.get() == 'e') {
-        tokens.push_back({"date", TokenType::COLUMN});
+        tokens.push_back({"date", TokenType::COLUMN}); // нашли ключевое слово "date", положили в вектор токен
       } else {
         throw logic_error("Unknown token");
       }
     } else if (c == 'e') {
       if (cl.get() == 'v' && cl.get() == 'e' && cl.get() == 'n' &&
           cl.get() == 't') {
-        tokens.push_back({"event", TokenType::COLUMN});
+        tokens.push_back({"event", TokenType::COLUMN}); // нашли ключевое слово "event", положили в вектор токен
       } else {
         throw logic_error("Unknown token");
       }
