@@ -28,6 +28,7 @@ private:
   int day;
 };
 
+Date ParseDate(std::istringstream& date_stream);
 
 
 #endif /* DATE_H_ */
