@@ -20,72 +20,75 @@ void TestAll();
 /*
  * test main() starts here
  */
-int main() {
-//	TestAll();
-	istringstream is("2000-12-13 ");
-	cout << ParseDate(is);
-	return 0;
-}
+//int main() {
+//
+//	return 0;
+//}
 /*
  * test main() ends here
  */
 
-//int main() {
-//  TestAll();
-//
-//  Database db;
-//
-//  for (string line; getline(cin, line); ) {
-//    istringstream is(line);
-//
-//    string command;
-//    is >> command;
-//    if (command == "Add") {
-//      const auto date = ParseDate(is);
-//      const auto event = ParseEvent(is);
-//      db.Add(date, event);
-//    } else if (command == "Print") {
-//      db.Print(cout);
-//    } else if (command == "Del") {
-//      auto condition = ParseCondition(is);
-//      auto predicate = [condition](const Date& date, const string& event) {
-//        return condition->Evaluate(date, event);
-//      };
-//      int count = db.RemoveIf(predicate);
-//      cout << "Removed " << count << " entries" << endl;
-//    } else if (command == "Find") {
-//      auto condition = ParseCondition(is);
-//      auto predicate = [condition](const Date& date, const string& event) {
-//        return condition->Evaluate(date, event);
-//      };
-//
-//      const auto entries = db.FindIf(predicate);
-//      for (const auto& entry : entries) {
-//        cout << entry << endl;
-//      }
-//      cout << "Found " << entries.size() << " entries" << endl;
-//    } else if (command == "Last") {
-//      try {
-//          cout << db.Last(ParseDate(is)) << endl;
-//      } catch (invalid_argument&) {
-//          cout << "No entries" << endl;
-//      }
-//    } else if (command.empty()) {
-//      continue;
-//    } else {
-//      throw logic_error("Unknown command: " + command);
-//    }
-//  }
-//
-//  return 0;
-//}
+int main() {
+  TestAll();
 
-void TestDate() {
-	{
-		istringstream is("2000-12-13");
-		Assert((ParseDate(is) == Date(2000i, 12i, 13i)), "Parse correct date");
-	}
+  Database db;
+
+  for (string line; getline(cin, line); ) {
+    istringstream is(line);
+
+    string command;
+    is >> command;
+    if (command == "Add") {
+      const auto date = ParseDate(is);
+      const auto event = ParseEvent(is);
+      db.Add(date, event);
+    } else if (command == "Print") {
+      db.Print(cout);
+    } else if (command == "Del") {
+      auto condition = ParseCondition(is);
+      auto predicate = [condition](const Date& date, const string& event) {
+        return condition->Evaluate(date, event);
+      };
+      int count = db.RemoveIf(predicate);
+      cout << "Removed " << count << " entries" << endl;
+    } else if (command == "Find") {
+      auto condition = ParseCondition(is);
+      auto predicate = [condition](const Date& date, const string& event) {
+        return condition->Evaluate(date, event);
+      };
+
+      const auto entries = db.FindIf(predicate);
+      for (const auto& entry : entries) {
+        cout << entry << endl;
+      }
+      cout << "Found " << entries.size() << " entries" << endl;
+    } else if (command == "Last") {
+      try {
+          cout << db.Last(ParseDate(is)) << endl;
+      } catch (invalid_argument&) {
+          cout << "No entries" << endl;
+      }
+    } else if (command.empty()) {
+      continue;
+    } else {
+      throw logic_error("Unknown command: " + command);
+    }
+  }
+
+  return 0;
 }
+
+//void TestDate() {
+//	{
+//		istringstream is("2000-12-13");
+//		Date d(2000, 12, 13);
+//		Date a = ParseDate(is);
+//		bool b = a == d;
+//		string s = "";
+//		Assert(ParseDate(is) == d, "Some error text");
+//
+//	}
+//}
 
 //void TestParseEvent() {
 //  {

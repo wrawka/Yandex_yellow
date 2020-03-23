@@ -5,6 +5,7 @@
  *      Author: A.Lebedev
  */
 #include "date.h"
+
 #include <iomanip>
 #include <stdexcept>
 
@@ -40,6 +41,12 @@ ostream& operator<< (ostream& out, const Date& date) {
 	  return out;
 }
 
+bool Date::operator== (const Date& r_date) {
+	return (year == r_date.year &&
+			month == r_date.month &&
+			day == r_date.day);
+}
+
 Date ParseDate(istringstream& date_stream) {
   bool ok = true;
 
@@ -55,7 +62,7 @@ Date ParseDate(istringstream& date_stream) {
 
   int day;
   ok = ok && (date_stream >> day);			// забираем день
-  ok = ok && (date_stream.peek() == ' ');	// проверяем пробел в конце Даты
+  ok = ok && (date_stream.peek() == ' ' || date_stream.eof());	// проверяем пробел или конец потока после Даты
 
   if (!ok) {
     throw logic_error("Wrong date format: " + date_stream.str());

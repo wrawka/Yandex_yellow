@@ -8,10 +8,11 @@
 #ifndef DATABASE_H_
 #define DATABASE_H_
 
-#include "Date.h"
 #include <iostream>
 #include <map>
 #include <set>
+
+#include "date.h"
 using namespace std;
 
 class Database {

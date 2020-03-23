@@ -22,6 +22,8 @@ public:
 
   friend std::ostream& operator<< (std::ostream& out, const Date& date);
 
+  bool operator== (const Date& date);
+
 private:
   int year;
   int month;
