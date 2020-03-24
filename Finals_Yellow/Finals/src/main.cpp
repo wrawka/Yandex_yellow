@@ -1,7 +1,7 @@
 #include "database.h"
 #include "date.h"
+#include "node.h"
 #include "condition_parser.h"
-//#include "node.h"
 #include "test_runner.h"
 
 #include <iostream>
@@ -11,9 +11,12 @@
 
 using namespace std;
 
-//string ParseEvent(istream& is) {
-//  // Реализуйте эту функцию
-//}
+string ParseEvent(istream& is) {
+  //TODO: Реализуйте эту функцию
+	string output;
+	getline(is, output);
+	return output;
+}
 
 void TestAll();
 

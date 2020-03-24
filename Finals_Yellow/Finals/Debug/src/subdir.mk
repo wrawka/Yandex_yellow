@@ -4,19 +4,19 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
-../src/Date.cpp \
+../src/date.cpp \
 ../src/main.cpp \
 ../src/test_runner.cpp \
 ../src/token.cpp 
 
 OBJS += \
-./src/Date.o \
+./src/date.o \
 ./src/main.o \
 ./src/test_runner.o \
 ./src/token.o 
 
 CPP_DEPS += \
-./src/Date.d \
+./src/date.d \
 ./src/main.d \
 ./src/test_runner.d \
 ./src/token.d 

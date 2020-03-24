@@ -21,7 +21,7 @@ public:
 	 * Встретив команду Add date event, ваша программа
 	 * должна добавить пару (date, event) в базу данных
 	 */
-	void Add(istream& is);
+	void Add(const Date& date, const string& event);
 
 	/*
 	 * Встретив команду Print, ваша программа должна вывести

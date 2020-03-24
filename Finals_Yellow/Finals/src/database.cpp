@@ -10,7 +10,7 @@
 #include <set>
 
 
-  void Database::Add(istream& is) {
+  void Database::Add(const Date& date, const string& event) {
 
   }
 
