@@ -1,6 +1,6 @@
 #pragma once
 
-//#include "node.h"
+#include "node.h"
 
 #include <map>
 #include <memory>
@@ -8,6 +8,6 @@
 
 using namespace std;
 
-//shared_ptr<Node> ParseCondition(istream& is);
+shared_ptr<Node> ParseCondition(istream& is);
 
 void TestParseCondition();

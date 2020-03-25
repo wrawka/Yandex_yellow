@@ -12,17 +12,19 @@
 #include <map>
 #include <set>
 
+#include "node.h"
 #include "date.h"
 using namespace std;
 
 class Database {
 public:
+	void Add(const Date& date, const string& event);
 	/*
 	 * Встретив команду Add date event, ваша программа
 	 * должна добавить пару (date, event) в базу данных
 	 */
-	void Add(const Date& date, const string& event);
 
+	  void Print(ostream& os) const;
 	/*
 	 * Встретив команду Print, ваша программа должна вывести
 	 * все пары (дата, событие), которые в данный момент
@@ -31,27 +33,26 @@ public:
 	 * События в рамках одной даты необходимо выводить в порядке добавления
 	 * (за исключением уже удалённых и попыток добавления повторов).
 	 */
-	  void Print() const;
 
+	ostream& Last(Date& date);
 	/*
 	 * По команде Last date нужно вывести
 	 * последнее из событий, случившихся к дате date.
 	 */
-	void Last();
 
+	void FindIf(Node& predicate);
 	/*
 	 * Встретив команду Find condition, ваша программа
 	 * должна вывести все пары (дата, событие),
 	 * которые в данный момент содержатся в базе данных
 	 * и удовлетворяют условию condition.
 	 */
-	void FindIf();
 
+	int RemoveIf(Node& predicate);
 	/*
 	 * Встретив команду Del condition, ваша программа должна удалить
 	 * из базы данных все события, удовлетворяющие условию condition
 	 */
-	void RemoveIf();
 
 private:
 	map<Date, set<string>> storage;
